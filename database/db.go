@@ -16,14 +16,13 @@ type Database struct {
 
 func NewDatabase() (*Database, error) {
 
-	host := os.Getenv("DB_HOST")
-	user := os.Getenv("DB_USER")
-	dbnames := os.Getenv("DB_NAME")
-	pass := os.Getenv("DB_PASS")
-	dbport := os.Getenv("DB_PORT")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbUsername := os.Getenv("DB_USERNAME")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", dbUsername, dbPassword, dbHost, dbPort, dbName)
 
-	// dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s TimeZone=Asia/Jakarta", host, user, pass, dbnames, dbport)
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", user, pass, host, dbport, dbnames)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
