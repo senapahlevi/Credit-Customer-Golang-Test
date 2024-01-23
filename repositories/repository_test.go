@@ -60,7 +60,15 @@ func TestCreateTransaction(t *testing.T) {
 
 	repo := NewRepository(db)
 
-	transaction := models.Transaction{}
+	transaction := models.Transaction{
+		ConsumerID:   1,
+		ContractNo:   "120423",
+		OTR:          1,
+		AdminFee:     1,
+		Installments: 1,
+		InterestRate: 1,
+		AssetName:    1,
+	}
 
 	mock.ExpectBegin()
 	mock.ExpectExec("INSERT INTO `transactions`").WillReturnResult(sqlmock.NewResult(1, 1))
