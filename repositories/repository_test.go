@@ -54,27 +54,22 @@ func TestCreateConsumer(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-// func TestCreateTransaction(t *testing.T) {
-// 	db, mock, err := SetupMock()
-// 	assert.NoError(t, err)
+func TestCreateTransaction(t *testing.T) {
+	db, mock, err := SetupMock()
+	assert.NoError(t, err)
 
-// 	repo := NewRepository(db)
+	repo := NewRepository(db)
 
-// 	transaction := models.Transaction{
-// 		// Isi dengan data dummy
-// 	}
+	transaction := models.Transaction{}
 
-// 	// Setup expectations
-// 	mock.ExpectBegin()
-// 	mock.ExpectExec("INSERT INTO `transactions`").WillReturnResult(sqlmock.NewResult(1, 1))
-// 	mock.ExpectCommit()
+	mock.ExpectBegin()
+	mock.ExpectExec("INSERT INTO `transactions`").WillReturnResult(sqlmock.NewResult(1, 1))
+	mock.ExpectCommit()
 
-// 	// Test
-// 	result, err := repo.CreateTransaction(transaction)
-// 	assert.NoError(t, err)
-// 	assert.NotEmpty(t, result)
+	result, err := repo.CreateTransaction(transaction)
+	assert.NoError(t, err)
+	assert.NotEmpty(t, result)
 
-// 	// Pastikan semua ekspektasi terpenuhi
-// 	err = mock.ExpectationsWereMet()
-// 	assert.NoError(t, err)
-// }
+	err = mock.ExpectationsWereMet()
+	assert.NoError(t, err)
+}
