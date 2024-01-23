@@ -67,7 +67,7 @@ func TestCreateTransaction(t *testing.T) {
 		AdminFee:     1,
 		Installments: 1,
 		InterestRate: 1,
-		AssetName:    1,
+		AssetName:    "Test name",
 	}
 
 	mock.ExpectBegin()
